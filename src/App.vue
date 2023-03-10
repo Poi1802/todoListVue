@@ -57,20 +57,26 @@ export default {
       tasks: [],
     };
   },
+  created() {
+    this.tasks = JSON.parse(localStorage.getItem('todos'));
+  },
   methods: {
     addTask() {
       if (this.task !== '') {
         const task = { id: Date.now(), text: this.task, complete: false };
         this.tasks = [task, ...this.tasks];
+        localStorage.setItem('todos', JSON.stringify(this.tasks));
         this.task = '';
       }
     },
     deleteTask(id) {
       this.tasks = this.tasks.filter((obj) => obj.id !== id);
+      localStorage.setItem('todos', JSON.stringify(this.tasks));
     },
     completeTask(id) {
       const findedTask = this.tasks.find((obj) => obj.id === id);
       findedTask.complete = !findedTask.complete;
+      localStorage.setItem('todos', JSON.stringify(this.tasks));
     },
   },
 };
