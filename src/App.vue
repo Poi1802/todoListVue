@@ -28,12 +28,12 @@ export default {
     this.tasks = JSON.parse(localStorage.getItem('todos'));
   },
   methods: {
-    addTask(task) {
+    addTask(task, deadline) {
       if (task === '') {
         return;
       }
 
-      const todo = { id: Date.now(), text: task, complete: false };
+      const todo = { id: Date.now(), text: task, complete: false, deadline };
       this.tasks = [todo, ...this.tasks];
       localStorage.setItem('todos', JSON.stringify(this.tasks));
     },
@@ -43,7 +43,6 @@ export default {
     },
     completeTask(id) {
       const findedTask = this.tasks.find((obj) => obj.id === id);
-      console.log(id);
       findedTask.complete = !findedTask.complete;
       localStorage.setItem('todos', JSON.stringify(this.tasks));
     },
@@ -63,7 +62,7 @@ main
       border-radius: 50%
       position: absolute
       right: -10px
-      top: 22px
+      top: 96px
       transition: 0.2s ease-in-out
       .create-plus
         font-size: 28px

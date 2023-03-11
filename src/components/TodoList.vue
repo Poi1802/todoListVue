@@ -5,13 +5,23 @@
         v-for="task in tasks"
         :key="task.id"
         class="todo__item flex justify-between mt-4 items-center mx-auto bg-white">
-        <p
-          :class="{
-            'line-through': task.complete,
-          }"
-          class="todo__text font-semibold p-2">
-          {{ task.text }}
-        </p>
+        <div>
+          <p
+            :class="{
+              'line-through': task.complete,
+            }"
+            class="todo__text font-semibold p-2">
+            {{ task.text }}
+          </p>
+          <div
+            v-if="task.deadline"
+            :class="{
+              'line-through': task.complete,
+            }"
+            class="deadline pl-2 pb-1 font-semibold italic">
+            Deadline: {{ task.deadline }}
+          </div>
+        </div>
         <div class="todo__actions flex items-center mr-3">
           <i
             @click="$emit('clickTrash', task.id)"
