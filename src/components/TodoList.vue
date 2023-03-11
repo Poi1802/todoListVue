@@ -9,6 +9,7 @@
           <p
             :class="{
               'line-through': task.complete,
+              'pb-0': task.deadline,
             }"
             class="todo__text font-semibold p-2">
             {{ task.text }}
